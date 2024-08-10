@@ -1,6 +1,6 @@
 # ADA
 
-## Trabajo Prpactico Integrador - Módulo 2 
+## Trabajo Práctico Integrador - Módulo 2 
 
 ### Módulo 2 – Fundamentos de Javascript.
 
