@@ -211,7 +211,7 @@ function borrarUsuario(nombre, email){
                 //console.log(indice);
                 if (indice !== -1) {
                     usuarioBorrado = usuarios[indice];
-                    libros.splice(indice, 1);
+                    usuarios.splice(indice, 1);
                     //encontro el usuario y lo eliminó; salgo de la funcion
                     return usuarioBorrado;
                 };
@@ -528,7 +528,15 @@ function normalizarDatos(){
 
 let sigue = true; 
 
-const promt = require("prompt-sync")({ sigint: true });
+const prompt = require("prompt-sync")({ sigint: true });
+
+function seguirPrograma(){
+    console.log("Para salir del programa, presione 1. Para volver al menu principal, presione cualquier otra tecla.");
+    let opc = parseInt(prompt());
+    if (opc === 1){
+        sigue = false;
+    };
+};
 
 function menuPrincipal(){
     console.log("-----------------------------------------------");
@@ -550,42 +558,44 @@ function menuPrincipal(){
     console.log("-----------------------------------------------");
 
     //El usuario ingresa la opción
-    let opcionSeleccionada = parseInt(promt("Ingrese el número de la opción que desea ejecutar: "));
+    let opcionSeleccionada = parseInt(prompt("Ingrese el número de la opción que desea ejecutar: "));
 
     switch(opcionSeleccionada){
         case 1:
             //Agregar Libro
-            let id = parseInt(promt("Ingrese el id del libro: "));
-            let titulo = promt("Ingrese el título del libro: ");
-            let autor = promt("Ingrese el autor: ");
-            let anio= parseInt(promt("Ingrese el año de publicación: "));
-            let genero = promt("Ingrese el genero del libro: ");
-            agregarLibro(id, titulo, autor, anio, genero)
+            let id = parseInt(prompt("Ingrese el id del libro: "));
+            let titulo = prompt("Ingrese el título del libro: ");
+            let autor = prompt("Ingrese el autor: ");
+            let anio= parseInt(prompt("Ingrese el año de publicación: "));
+            let genero = prompt("Ingrese el genero del libro: ");
+            agregarLibro(id, titulo, autor, anio, genero);
+            seguirPrograma();
             break;
         case 2:
             //Buscar un Libro
             console.log("1. Buscar libro por su título: ");
             console.log("2. Buscar libros por autor: ");
             console.log("3. Buscar libros por género: ");
-            let opc = parseInt(promt("Ingrese la opción del criterio para buscar el libro: "));
+            let opc = parseInt(prompt("Ingrese la opción del criterio para buscar el libro: "));
             if (opc === 1) {
-                let tituloBuscado = promt("Ingrese el título del libro: ");
+                let tituloBuscado = prompt("Ingrese el título del libro: ");
                 buscarLibro("titulo", tituloBuscado);
             } else if (opc ===2) {
-                let autorBuscado = promt("Ingrese el autor: ");
+                let autorBuscado = prompt("Ingrese el autor: ");
                 buscarLibro("autor", autorBuscado);
             } else if (opc === 3){
-                let generoBuscado = promt("Ingrese el género: ");
+                let generoBuscado = prompt("Ingrese el género: ");
                 buscarLibro("genero", generoBuscado);
             } else {
                 console.log("La opción no es correcta");
             };
+            seguirPrograma();
             break;
         case 3:
             //Ordenar Libros
             console.log("1. Ordenar libros por su título: ");
             console.log("2. Ordenar libros por año de publicación: ");
-            let criterioDeOrden = parseInt(promt("Ingrese la opción del criterio para buscar el libro: "));
+            let criterioDeOrden = parseInt(prompt("Ingrese la opción del criterio para buscar el libro: "));
             if (criterioDeOrden === 1) {
                 ordenarLibros("titulo");
             } else if (criterioDeOrden ===2) {
@@ -593,61 +603,75 @@ function menuPrincipal(){
             } else {
                 console.log("La opción no es correcta");
             };
+            seguirPrograma();
             break;          
         case 4:
             //Borrar in Libro
-            let idLibroABorrar = parseInt(promt("Ingrese el id del libro que desea elimminar: "));
+            let idLibroABorrar = parseInt(prompt("Ingrese el id del libro que desea elimminar: "));
             borrarLibro(idLibroABorrar);
+            seguirPrograma();
             break;
         case 5:
             //Registrar un nuevo usuario
-            let nombreUsuario = promt("Ingrese el nombre del usuario: ");
-            let mailUsuario = promt("Ingrese el mail del usuario: ");
+            let nombreUsuario = prompt("Ingrese el nombre del usuario: ");
+            let mailUsuario = prompt("Ingrese el mail del usuario: ");
             registrarUsuario(nombreUsuario, mailUsuario);
+            seguirPrograma();
             break;
         case 6:
             //Mostrar todos los usuarios
             mostrarTodosLosUsuarios();
+            seguirPrograma();
             break;
         case 7:
             //Buscar un usuario
-            let mailUsuarioBuscado = promt("Ingrese el mail del usuario: ");
+            let mailUsuarioBuscado = prompt("Ingrese el mail del usuario: ");
             buscarUsuario(mailUsuarioBuscado);
+            seguirPrograma();
             break;
         case 8:
             //Borrar un usuario
-            let nombreEliminado = promt("Ingrese el nombre del usuario: ");
-            let mailEliminado = promt("Ingrese el mail del usuario: ");
-            borrarUsuario(nombreEliminado, mailEliminado)
+            let nombreEliminado = prompt("Ingrese el nombre del usuario: ");
+            let mailEliminado = prompt("Ingrese el mail del usuario: ");
+            borrarUsuario(nombreEliminado, mailEliminado);
+            seguirPrograma();
             break;
         case 9:
             //Prestar un Libro
-            let idLibroPrestamo = parseInt(promt("Ingrese el id del libro: "));
-            let idUsuarioPrestamo = parseInt(promt("Ingrese el id del usuario: "));
+            let idLibroPrestamo = parseInt(prompt("Ingrese el id del libro: "));
+            let idUsuarioPrestamo = parseInt(prompt("Ingrese el id del usuario: "));
             prestarLibro(idLibroPrestamo, idUsuarioPrestamo);
+            //console.log(libros);
+            seguirPrograma();
             break;
         case 10:
             //Devolver un Libro
-            let idLibroDevolucion = parseInt(promt("Ingrese el id del libro: "));
-            let idUsuarioDevolucion = parseInt(promt("Ingrese el id del usuario: "));
+            let idLibroDevolucion = parseInt(rompt("Ingrese el id del libro: "));
+            let idUsuarioDevolucion = parseInt(prompt("Ingrese el id del usuario: "));
             devolverLibro(idLibroDevolucion, idUsuarioDevolucion);
+            //console.log(libros);
+            seguirPrograma();
             break;
         case 11:
             //Generar reporte de Libros
             generarReporteLibros();
+            seguirPrograma();
             break;
         case 12:
             //Libros con más de una palabra en el título
             librosConPalabrasEnTitulo();
+            seguirPrograma();
             break;
         case 13:
             //Estadísticas
             calcularEstadisticas();
+            seguirPrograma();
             break;
         case 14:
             //Normalizar Datos
             normalizarDatos();
             console.log("Los datos fueron normalizados");
+            seguirPrograma();
             break;
         case 15:
             sigue = false;
@@ -655,7 +679,8 @@ function menuPrincipal(){
             break;
         default:
             console.log("La opción ingresada no es correcta.");
-            break
+            seguirPrograma();
+            break;
     };
 };
 
