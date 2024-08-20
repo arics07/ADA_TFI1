@@ -646,7 +646,7 @@ function menuPrincipal(){
             break;
         case 10:
             //Devolver un Libro
-            let idLibroDevolucion = parseInt(rompt("Ingrese el id del libro: "));
+            let idLibroDevolucion = parseInt(prompt("Ingrese el id del libro: "));
             let idUsuarioDevolucion = parseInt(prompt("Ingrese el id del usuario: "));
             devolverLibro(idLibroDevolucion, idUsuarioDevolucion);
             //console.log(libros);
